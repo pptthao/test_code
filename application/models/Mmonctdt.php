@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mmonctdt extends MY_Model {
 	public function getsv(){
-        $this->db->select("masv, tensv")
-                ->limit(10);
+        $this->db->select("masv, tensv");
         return $this->db->get("tbl_sinhvien")->result_array();
     }
     public function getslsv(){
