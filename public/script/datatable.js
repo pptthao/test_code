@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var table;
     initTableData();
     function initTableData() {
         $.ajax({
@@ -11,41 +12,42 @@ $(document).ready(function () {
                 var kq = JSON.parse(res);
                 // console.log(kq);
 
-                var table;
                 var data = [];
                 $.each(kq, function (i) {
                     data.push({
                         "stt": i + 1,
                         "masv": kq[i]['masv'],
                         "tensv": kq[i]['tensv'],
-                        "tacvu": "<button type='button' value='" + kq[i]['id'] + "' name='sua' class='btn btn-primary btnSua " + kq[i]['id'] + "' data-toggle='modal' data-target='#modaledit' id='" + kq[i]['id'] + "'>Sửa</button>&emsp;<button type='button' value='" + kq[i]['id'] + "' name='xoa' class='btn btn-danger btnXoa' id=''>Xóa</button></td>"
+                        "tacvu": "<button type='button' value='" + kq[i]['id'] + "' name='sua' class='btn btn-primary btnSua " + kq[i]['id'] + "' data-toggle='modal' data-target='#modaledit' id='" + kq[i]['id'] + "'>Sửa</button>&emsp;<button type='button' value='" + kq[i]['id'] + "' name='xoa' class='btn btn-danger btnXoa' id='' onclick= 'xacnhanxoa()'>Xóa</button></td>"
 
                     })
                 })
-                table = $("#example2").DataTable({
-                    // "processing": true,
-                    // 'paging': false,
-                    // 'lengthChange': false,
-                    // 'searching': false,
-                    // 'ordering': false,
-                    // 'info': false,
-                    // 'autoWidth': false,
-                    data,
-                    columns: [
-                        { data: 'stt' },
-                        { data: 'masv' },
-                        { data: 'tensv' },
-                        { data: 'tacvu' },
-                    ]
-                });
+                hiendata(data);
             }
+        });
+    }
+    function hiendata(data){
+        table = $("#example2").DataTable({
+            "processing": true,
+            // 'paging': false,
+            // 'lengthChange': false,
+            // 'searching': false,
+            // 'ordering': false,
+            // 'info': false,
+            // 'autoWidth': false,
+            data,
+            columns: [
+                { data: 'stt' },
+                { data: 'masv' },
+                { data: 'tensv' },
+                { data: 'tacvu' },
+            ]
         });
     }
     $(document).on('click', '#addsv', function (e) {
         var masv = $('input[name="masv"]').val();
         var tensv = $('input[name="tensv"]').val();
 
-        dem = $('.odd').length + 1 + $('.even').length;
         $.ajax({
             url: window.location.pathname,
             type: "post",
@@ -54,20 +56,20 @@ $(document).ready(function () {
                 masv: masv,
                 tensv: tensv,
             },
-            success: function (res) {
-                // alert(res)
+            success: function (kq) {
+                var res = JSON.parse(kq);
                 if (res != 0) {
-                    // if(dem < 10){
-                        var table2 = '';
-                        table2 += '<tr class="odd" role="row">';
-                        table2 += '<td>' + dem + '</td>';
-                        table2 += '<td>' + masv + '</td>';
-                        table2 += '<td>' + tensv + '</td>';
-                        table2 += '<td><button type="button" value="' + res + '" name="sua" class="btn btn-primary btnSua ' + res + '" data-toggle="modal" data-target="#modaledit" id="' + res + '">Sửa</button>&emsp;<button type="button" value="' + res + '" name="xoa" class="btn btn-danger btnXoa" id="">Xóa</button></td>';
-                        table2 += '</tr>';
-                        // console.log(table2);
-                        $(table2).appendTo('#dsmon');
-                    // }
+                    var data = [];
+                    data = ({
+                        "stt": res['count'],
+                        "masv": masv,
+                        "tensv": tensv,
+                        "tacvu": "<button type='button' value='" + res['id'] + "' name='sua' class='btn btn-primary btnSua " + res['id'] + "' data-toggle='modal' data-target='#modaledit' id='" + res['id'] + "'>Sửa</button>&emsp;<button type='button' value='" + res['id'] + "' name='xoa' class='btn btn-danger btnXoa' id='' onclick= 'xacnhanxoa()'>Xóa</button></td>"
+
+                    })
+                    var obj ={"stt":data["stt"] ,"masv":data["masv"],"tensv":data["tensv"],"tacvu":data["tacvu"]};
+                    $("#example2").DataTable().row.add(obj).draw();
+
                 }
             }
         });
@@ -105,27 +107,34 @@ $(document).ready(function () {
         })
 
     });
-    $(document).on('click', '.btnXoa', function (e) {
-        var xoa = $(this);
-        var id = xoa.val();
-        // alert(id);
-        $.ajax({
-            url: window.location.pathname,
-            type: "post",
-            data: {
-                action: "deletesv",
-                id: id,
-            },
-            success: function (res) {
-                if (res != 0) {
-                    // alert("Xóa thành công")
-                    $(xoa).closest("tr").remove();
-                }
-            }
-        });
+    function xacnhanxoa() {
+        let text = "Bạn có chắc muốn xóa sinh viên này?";
 
-        // alert(vl);
+        return confirm(text);
+    }
+
+    $(document).on('click', '.btnXoa', function (e) {
+        if (xacnhanxoa() == true) {
+            var xoa = $(this);
+            var id = xoa.val();
+            // alert(id);
+            $.ajax({
+                url: window.location.pathname,
+                type: "post",
+                data: {
+                    action: "deletesv",
+                    id: id,
+                },
+                success: function (res) {
+                    if (res != 0) {
+                        // alert("Xóa thành công")
+                        $(xoa).closest("tr").remove();
+                    }
+                }
+            });
+        }
     });
+
     $(document).on('click', '.close', function (e) {
         $('input[name="masv"]').val('');
         $('input[name="tensv"]').val('');

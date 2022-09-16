@@ -11,8 +11,9 @@ class Mdatatable extends MY_Model {
     }
     public function insertSV($data){
         $this->db->insert("tbl_sinhvien", $data);
-        $last_id = $this->db->insert_id();
-        return $last_id;
+        $ar['id']       = $this->db->insert_id();
+        $ar['count']    = $this->db->get("tbl_sinhvien")->num_rows();
+        return $ar;
     }
     public function updateSV($ma, $data){
         
