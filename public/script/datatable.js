@@ -18,7 +18,7 @@ $(document).ready(function () {
                         "stt": i + 1,
                         "masv": kq[i]['masv'],
                         "tensv": kq[i]['tensv'],
-                        "tacvu": "<button type='button' value='" + kq[i]['masv'] + "' name='sua' class='btn btn-primary btnSua " + kq[i]['masv'] + "' data-toggle='modal' data-target='#modaledit' id='" + kq[i]['masv'] + "'>Sửa</button>&emsp;<button type='button' value='" + kq[i]['masv'] + "' name='xoa' class='btn btn-danger btnXoa' id=''>Xóa</button></td>"
+                        "tacvu": "<button type='button' value='" + kq[i]['id'] + "' name='sua' class='btn btn-primary btnSua " + kq[i]['id'] + "' data-toggle='modal' data-target='#modaledit' id='" + kq[i]['id'] + "'>Sửa</button>&emsp;<button type='button' value='" + kq[i]['id'] + "' name='xoa' class='btn btn-danger btnXoa' id=''>Xóa</button></td>"
 
                     })
                 })
@@ -55,46 +55,50 @@ $(document).ready(function () {
                 tensv: tensv,
             },
             success: function (res) {
+                // alert(res)
                 if (res != 0) {
-                    var table2 = '';
-                    table2 += '<tr class="odd" role="row">';
-                    table2 += '<td>' + dem + '</td>';
-                    table2 += '<td>' + masv + '</td>';
-                    table2 += '<td>' + tensv + '</td>';
-                    table2 += '<td><button type="button" value="' + masv + '" name="sua" class="btn btn-primary btnSua ' + masv + '" data-toggle="modal" data-target="#modaledit" id="' + masv + '">Sửa</button>&emsp;<button type="button" value="' + masv + '" name="xoa" class="btn btn-danger btnXoa" id="">Xóa</button></td>';
-                    table2 += '</tr>';
-                    // console.log(table2);
-                    $(table2).appendTo('#dsmon');
+                    // if(dem < 10){
+                        var table2 = '';
+                        table2 += '<tr class="odd" role="row">';
+                        table2 += '<td>' + dem + '</td>';
+                        table2 += '<td>' + masv + '</td>';
+                        table2 += '<td>' + tensv + '</td>';
+                        table2 += '<td><button type="button" value="' + res + '" name="sua" class="btn btn-primary btnSua ' + res + '" data-toggle="modal" data-target="#modaledit" id="' + res + '">Sửa</button>&emsp;<button type="button" value="' + res + '" name="xoa" class="btn btn-danger btnXoa" id="">Xóa</button></td>';
+                        table2 += '</tr>';
+                        // console.log(table2);
+                        $(table2).appendTo('#dsmon');
+                    // }
                 }
             }
         });
     });
     $(document).on('click', '.btnSua', function (e) {
+        var id = $(this).val();
         var ma = $(this).closest("td").prev().prev().text();
         var ten = $(this).closest("td").prev().text();
         $('input[name="edit_masv"]').val(ma);
         $('input[name="edit_tensv"]').val(ten);
-        $("#edit").val(ma);
-        $(this).addClass(ma)
+        $("#edit").val(id);
+        $(this).addClass(id)
         $(document).on('click', '#edit', function (e) {
             // alert("sửa")
             var new_ma = $('input[name="edit_masv"]').val();
             var new_ten = $('input[name="edit_tensv"]').val();
-            var old_ma = $(this).val();
+            var id = $(this).val();
             $.ajax({
                 url: window.location.pathname,
                 type: "post",
                 data: {
                     action: "editsv",
-                    old_ma: old_ma,
+                    id: id,
                     masv: new_ma,
                     tensv: new_ten,
                 },
                 success: function (res) {
                     // alert("sửa")
                     if (res != 0) {
-                        $("." + old_ma).closest("td").prev().prev().text(new_ma);
-                        $("." + old_ma).closest("td").prev().text(new_ten);
+                        $("." + id).closest("td").prev().prev().text(new_ma);
+                        $("." + id).closest("td").prev().text(new_ten);
                     }
                 }
             });
@@ -103,14 +107,14 @@ $(document).ready(function () {
     });
     $(document).on('click', '.btnXoa', function (e) {
         var xoa = $(this);
-        var ma = xoa.closest("td").prev().prev().text();
-        // alert(ma);
+        var id = xoa.val();
+        // alert(id);
         $.ajax({
             url: window.location.pathname,
             type: "post",
             data: {
                 action: "deletesv",
-                masv: ma,
+                id: id,
             },
             success: function (res) {
                 if (res != 0) {

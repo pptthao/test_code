@@ -6,7 +6,7 @@ class Cdatatable extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Mmonctdt');
+		$this->load->model('Mdatatable');
 	}
 	public function index()
 	{
@@ -14,7 +14,7 @@ class Cdatatable extends MY_Controller
 		$data['user'] = getSession();
 		$data['message'] = getMessages();
 		$data['url'] = base_url();
-		// $data['sinhvien'] = $this->Mmonctdt->getsv();
+		// $data['sinhvien'] = $this->Mdatatable->getsv();
 
 		if($this->input->post('action') == "getsv"){
 			$this->ajaxGetSV();
@@ -38,28 +38,28 @@ class Cdatatable extends MY_Controller
 	}
 	public function ajaxGetSV(){
 		
-		$sinhvien = $this->Mmonctdt->getsv();
+		$sinhvien = $this->Mdatatable->getsv();
 		echo json_encode($sinhvien);
 		exit();
 	}
 	public function ajaxAddSV(){
 		$data['masv'] = $this->input->post("masv");
 		$data['tensv'] = $this->input->post("tensv");
-		$res = $this->Mmonctdt->insertSV($data);
+		$res = $this->Mdatatable->insertSV($data);
 		echo json_encode($res);
 		exit();
 	}
 	public function ajaxEditSV(){
-		$ma = $this->input->post("old_ma");
+		$data['id'] = $this->input->post("id");
 		$data['masv'] = $this->input->post("masv");
 		$data['tensv'] = $this->input->post("tensv");
-		$res = $this->Mmonctdt->updateSV($ma, $data);
+		$res = $this->Mdatatable->updateSV($data['id'], $data);
 		echo json_encode($res);
 		exit();
 	}
 	public function ajaxDeleteSV(){
-		$ma = $this->input->post("masv");
-		$res = $this->Mmonctdt->deleteSV($ma);
+		$ma = $this->input->post("id");
+		$res = $this->Mdatatable->deleteSV($ma);
 		echo json_encode($res);
 		exit();
 		

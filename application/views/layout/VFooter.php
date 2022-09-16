@@ -1,9 +1,4 @@
 </body>
-<script type="text/javascript">
-// {if isset($message)}
-// $(document).ready(function () {
-// 	fireToast("{$message.type}","{$message.title}");	
-// })
-// {/if}
-</script>
+
+<script src="{$url}public/bootstrap/js/bootstrap.min.js"></script>
 </html>

@@ -81,9 +81,9 @@
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th>Ma sinh vien</th>
-                                                <th>Ho ten</th>
-                                                <th>Tac vu</th>
+                                                <th>Mã sinh viên</th>
+                                                <th>Họ tên</th>
+                                                <th>Tác vụ</th>
                                             </tr>
                                         </thead>
                                         <tbody class="" id="dsmon">
