@@ -82,6 +82,24 @@
                                             </tr>
                                         </thead>
                                         <tbody class="" id="dsmon">
+                                            <tr>
+                                                <td><input type="checkbox" class="check" ></td>
+                                                <td>Lập trình cơ sở</td>
+                                                <td>3</td>
+                                                <td>TC</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="check"></td>
+                                                <td>Lập trình java</td>
+                                                <td>3</td>
+                                                <td>TC</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="check"></td>
+                                                <td>Lập trình android</td>
+                                                <td>3</td>
+                                                <td>TC</td>
+                                            </tr>
                                             
                                         </tbody>
                                     </table>
@@ -127,7 +145,6 @@
                                             </tr>
                                         </thead>
                                         <tbody id="monctdt">
-                                            <tr></tr>
                                         </tbody>
                                     </table>
                                 </div>

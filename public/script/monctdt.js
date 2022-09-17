@@ -41,14 +41,14 @@ $(document).ready(function () {
     function initTableData() {
         var data = [
             {
-                "in":"<input type='checkbox'/>",
+                "in":"<input type='checkbox' class='check'/>",
                 "stt": 1,
                 "tenmon": "môn 1",
                 "khoiluong": "khối lượng 1",
                 "dvt": "đơn vị tính 1"
             },
             {
-                "in":"<input type='checkbox'/>",
+                "in":"<input type='checkbox' class='check'/>",
                 "stt": 2,
                 "tenmon": "môn 2",
                 "khoiluong": "khối lượng 2",
