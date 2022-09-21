@@ -14,6 +14,11 @@ class Cdatatable extends MY_Controller
 		$data['user'] = getSession();
 		$data['message'] = getMessages();
 		$data['url'] = base_url();
+		// $data['sinhvien'] = $this->Mdatatable->getsv();
+
+		if($this->input->post('action') == "getsv"){
+			$this->ajaxGetSV();
+		}
 		
 		if($this->input->post('action') == "addsv"){
 			$this->ajaxAddSV();
@@ -27,9 +32,17 @@ class Cdatatable extends MY_Controller
 			$this->ajaxDeleteSV();
 		}
 		$data['sinhvien'] = $this->Mdatatable->getsv();
-        $this->parser->parse('Vdatatable', $data);
-    }
-	
+		$temp['data'] = $data;
+		// pr($data);
+		$temp['template'] = "Vdatatable";
+		$this->load->view('layout/VContent', $temp);
+	}
+	public function ajaxGetSV(){
+		
+		$sinhvien = $this->Mdatatable->getsv();
+		echo json_encode($sinhvien);
+		exit();
+	}
 	public function ajaxAddSV(){
 		$data['masv'] = $this->input->post("masv");
 		$data['tensv'] = $this->input->post("tensv");

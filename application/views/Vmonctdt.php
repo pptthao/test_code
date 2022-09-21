@@ -110,10 +110,10 @@
                     </div>
                     <div class="col-md-2 cangiua">
                         <center>
-                            <button type="button" class="btn btn-info" id="xepmon">=></button>
+                            <button type="button" class="btn btn-info" id="xepmon"><span class="glyphicon glyphicon-arrow-right"></span></button>
                             <br>
                             <br>
-                            <button type="button" class="btn btn-info" id="quaylai"><=</button>
+                            <button type="button" class="btn btn-info" id="quaylai"><span class="glyphicon glyphicon-arrow-left"></span></button>
                             <br>
                             <br><br><br>
                             <button type="button" class="btn btn-success" id="luumon">

@@ -2,17 +2,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mdatatable extends MY_Model {
-    public function getsv(){
+	public function getsv(){
         $this->db->select("id, masv, tensv");
         return $this->db->get("tbl_sinhvien")->result_array();
     }
-	public function insertSV($data){
+    public function getslsv(){
+        return $this->db->get("tbl_sinhvien")->result_array();
+    }
+    public function insertSV($data){
         $this->db->insert("tbl_sinhvien", $data);
-        $ar['id']       = $this->db->insert_id();
-        $ar['count']    = $this->db->get("tbl_sinhvien")->num_rows();
-        return $ar;
-        // $this->db->select("id, masv, tensv");
-        // return $this->db->get("tbl_sinhvien")->result_array();
+        // $ar['id']       = $this->db->insert_id();
+        // $ar['count']    = $this->db->get("tbl_sinhvien")->num_rows();
+        // return $ar;
+        $this->db->select("id, masv, tensv");
+        return $this->db->get("tbl_sinhvien")->result_array();
     }
     public function updateSV($ma, $data){
         
