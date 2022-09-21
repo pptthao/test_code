@@ -74,7 +74,7 @@ $(document).ready(function () {
                         "stt": i,
                         "masv": new_ma,
                         "tensv": new_ten,
-                        "tacvu": "<button type='button' value='" + res['id'] + "' name='sua' class='btn btn-primary btnSua " + stt + "' data-toggle='modal' data-target='#modaledit' id='" + stt + "'>Sửa</button>&emsp;<button type='button' value='" + res['id'] + "' name='xoa' class='btn btn-danger btnXoa' id='' onclick= 'xacnhanxoa()'>Xóa</button></td>"
+                        "tacvu": "<button type='button' value='" + id + "' name='sua' class='btn btn-primary btnSua " + stt + "' data-toggle='modal' data-target='#modaledit' id='" + stt + "'>Sửa</button>&emsp;<button type='button' value='" + id + "' name='xoa' class='btn btn-danger btnXoa' id='' onclick= 'xacnhanxoa()'>Xóa</button></td>"
 
                     })
                     var index = i - 1;
@@ -94,7 +94,7 @@ $(document).ready(function () {
         if (xacnhanxoa() == true) {
             var stt = $(this).closest("td").prev().prev().prev().text();
             var id =  $(this).val();
-
+            
             $.ajax({
                 url: window.location.pathname,
                 type: "post",
