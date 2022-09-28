@@ -77,6 +77,10 @@ class Mmonctdt extends MY_Model
         return $this->db->get('tbl_monctdt')->num_rows();
     }
 	public function themmonctdt($array){
+        foreach($array as $k => $v){
+		    $this->db->where('ma_ctdt',$v['ma_ctdt']);
+		    $this->db->delete('tbl_monctdt');
+        }
 		$this->db->insert_batch('tbl_monctdt',$array);
 		return $this->db->affected_rows();
 	}

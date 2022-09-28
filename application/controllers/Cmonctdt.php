@@ -101,20 +101,20 @@ class Cmonctdt extends MY_Controller
 		//thêm môn ctdt với điều kiện : ctdt và môn đã lấy
 		for($i=0;$i<count($arrayMon)-1;$i++){ 
 			//check cac mon đã xếp -> điều kiện: ma_monctdt
-			$checkmon = $this->Mmonctdt->checkMonDaXep($arrayCtdt['ma_ctdt'].'_'.$arrayMon[$i]);
-			if($checkmon < 1){
+			// $checkmon = $this->Mmonctdt->checkMonDaXep($arrayCtdt['ma_ctdt'].'_'.$arrayMon[$i]);
+			// if($checkmon < 1){
 				$monctdt[] = array(
 					'ma_monctdt' => $arrayCtdt['ma_ctdt'].'_'.$arrayMon[$i],
 					'mamon' => $arrayMon[$i], 
 					'ma_ctdt' => $arrayCtdt['ma_ctdt'], 
 					'macanbo' => $maCanbo, 
 				); 
-			}
+			// }
 		}
-		if($checkmon > 0){
-			echo ('loi');
-			exit();
-		}
+		// if($checkmon > 0){
+		// 	echo ('loi');
+		// 	exit();
+		// }
 		$row = $this->Mmonctdt->themmonctdt($monctdt);
 		echo json_encode($row);
 		exit();
