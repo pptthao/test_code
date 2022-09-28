@@ -72,6 +72,10 @@ class Mmonctdt extends MY_Model
 		return $this->db->affected_rows();
 	}
     
+    public function checkMonDaXep($ma_monctdt){
+        $this->db->where('ma_monctdt', $ma_monctdt);
+        return $this->db->get('tbl_monctdt')->num_rows();
+    }
 	public function themmonctdt($array){
 		$this->db->insert_batch('tbl_monctdt',$array);
 		return $this->db->affected_rows();
