@@ -9,6 +9,6 @@ $route['home'] = 'CHome';
 $route['monctdt']   = 'Cmonctdt';
 $route['datatable']   = 'Cdatatable';
 
-$route['default_controller'] = 'Cdatatable';
+$route['default_controller'] = 'Cmonctdt';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

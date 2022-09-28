@@ -24,7 +24,7 @@
 	<!-- animation css -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 	<!-- DataTables -->
-	<!-- <link rel="stylesheet" href="{$url}public/datatable/css/dataTables.bootstrap.min.css"> -->
+  <link rel="stylesheet" href="{$url}public/select2/dist/css/select2.min.css">
 </head>
 <style>
 	.menu a{
@@ -37,7 +37,7 @@
 <div class="menu">
 	<label>Menu</label>
 	<button class="btn btn-success "><a href="{$url}home">upload ảnh</a></button>
-	<button class="btn btn-success"><a href="{$url}monctdt">xếp môn ctdt</a></button>
+	<button class="btn btn-success"><a href="{$url}monctdt?ma_ctdt=1000_7_Anninhmng44_2019">xếp môn ctdt</a></button>
 	<button class="btn btn-success"><a href="{$url}datatable">datatable</a></button>
 	
 </div>
